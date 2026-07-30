@@ -1,5 +1,3 @@
-package SmartHome;
-
 /**
  * SmartHomeTestRunner.java
  *
@@ -95,7 +93,7 @@ public class SmartHomeTestRunner {
         testGuestModeWithMixedEnhancements();
 
         // --------------------------------------------------------
-        // SUMMARY
+        //  SUMMARY
         // --------------------------------------------------------
         System.out.println("\n" + "=".repeat(55));
         System.out.println("  RESULTS: " + passed + " passed, " + failed + " failed, " + totalTests + " total");
@@ -111,7 +109,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 1. LEAF DEVICE BASICS
+    //  1. LEAF DEVICE BASICS
     // ============================================================
 
     static void testLightBasics() {
@@ -143,7 +141,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 2. ROOM
+    //  2. ROOM
     // ============================================================
 
     static void testRoom() {
@@ -172,15 +170,15 @@ public class SmartHomeTestRunner {
 
     static void testRoomMixedDevices() {
         Room r = new Room("Test");
-        r.addDevice(new SmartLight()); // 10W
-        r.addDevice(new SmartLight()); // 10W
-        r.addDevice(new SmartSpeaker()); // 5W
+        r.addDevice(new SmartLight());      // 10W
+        r.addDevice(new SmartLight());      // 10W
+        r.addDevice(new SmartSpeaker());    // 5W
         r.activate();
         assertEquals("Room 2 lights + speaker", 25.0, r.getPowerUsage());
     }
 
     // ============================================================
-    // 3. HOME
+    //  3. HOME
     // ============================================================
 
     static void testHomeAggregation() {
@@ -211,7 +209,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 4. ACCESS RESTRICTION TEST
+    //  4. ACCESS RESTRICTION TEST
     // ============================================================
 
     static void testAccessRestrictedBlocksActivation() {
@@ -236,7 +234,7 @@ public class SmartHomeTestRunner {
 
     static void testAccessRestrictedPowerUnaffected() {
         SmartLight l = new SmartLight();
-        l.activate(); // turn on BEFORE locking
+        l.activate();   // turn on BEFORE locking
         AccessRestricted ar = new AccessRestricted(l, 1234);
         // Locked but already running — power should still report
         assertEquals("Locked but running device reports power", 10.0, ar.getPowerUsage());
@@ -250,7 +248,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 5. TIMER CONTROL
+    //  5. TIMER CONTROL
     // ============================================================
 
     static void testTimerControlledActivation() {
@@ -284,7 +282,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 6. POWER THROTTLE
+    //  6. POWER THROTTLE
     // ============================================================
 
     static void testPowerThrottledCaps() {
@@ -306,7 +304,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 7. Multiple Upgrade
+    //  7. Multiple Upgrade
     // ============================================================
 
     static void testAccessRestrictedPlusTimerControlled() {
@@ -356,7 +354,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 8. UNIFORM INTERFACE
+    //  8. UNIFORM INTERFACE
     // ============================================================
 
     static void testUpdatedDeviceIsSmartDevice() {
@@ -376,9 +374,9 @@ public class SmartHomeTestRunner {
 
     static void testRoomAcceptsUpgradedChildren() {
         Room r = new Room("Test");
-        r.addDevice(new SmartLight()); // plain
-        r.addDevice(new AccessRestricted(new SmartThermostat(), 1234)); // upgraded
-        r.addDevice(new PowerThrottled(new SmartLight(), 5)); // upgraded
+        r.addDevice(new SmartLight());                                 // plain
+        r.addDevice(new AccessRestricted(new SmartThermostat(), 1234));  // upgraded
+        r.addDevice(new PowerThrottled(new SmartLight(), 5));            // upgraded
         r.activate();
         // Only plain light and throttled light should be on (thermostat is locked)
         // plain light = 10W, throttled light = 5W, locked thermostat = 0W
@@ -386,13 +384,13 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 9. ECOMODE — ROOM LEVEL
+    //  9. ECOMODE — ROOM LEVEL
     // ============================================================
 
     static void testEcoModeWithinBudget() {
         Room r = new Room("Test");
-        r.addDevice(new SmartLight()); // 10W
-        r.addDevice(new SmartLight()); // 10W
+        r.addDevice(new SmartLight());   // 10W
+        r.addDevice(new SmartLight());   // 10W
         SmartDevice eco = new EcoMode(r, 100);
         eco.activate();
         assertEquals("EcoMode within budget", 20.0, eco.getPowerUsage());
@@ -400,8 +398,8 @@ public class SmartHomeTestRunner {
 
     static void testEcoModeShedsOverBudget() {
         Room r = new Room("Test");
-        r.addDevice(new SmartLight()); // 10W
-        r.addDevice(new SmartThermostat()); // 150W
+        r.addDevice(new SmartLight());       // 10W
+        r.addDevice(new SmartThermostat());  // 150W
         SmartDevice eco = new EcoMode(r, 100);
         eco.activate();
         // Thermostat (last added) should be shed: 10W remains
@@ -413,9 +411,9 @@ public class SmartHomeTestRunner {
         SmartLight l1 = new SmartLight();
         SmartLight l2 = new SmartLight();
         SmartThermostat t = new SmartThermostat();
-        r.addDevice(l1); // 10W — index 0, added first
-        r.addDevice(l2); // 10W — index 1
-        r.addDevice(t); // 150W — index 2, added last → shed first
+        r.addDevice(l1);   // 10W  — index 0, added first
+        r.addDevice(l2);   // 10W  — index 1
+        r.addDevice(t);    // 150W — index 2, added last → shed first
         SmartDevice eco = new EcoMode(r, 100);
         eco.activate();
         // Thermostat (last) should be shed first, lights remain
@@ -426,9 +424,9 @@ public class SmartHomeTestRunner {
 
     static void testEcoModePowerReporting() {
         Room r = new Room("Test");
-        r.addDevice(new SmartLight()); // 10W
-        r.addDevice(new SmartLight()); // 10W
-        r.addDevice(new SmartThermostat()); // 150W
+        r.addDevice(new SmartLight());       // 10W
+        r.addDevice(new SmartLight());       // 10W
+        r.addDevice(new SmartThermostat());  // 150W
         SmartDevice eco = new EcoMode(r, 100);
         eco.activate();
         // After shedding, power should not exceed budget
@@ -436,7 +434,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 10. GUESTMODE — ROOM LEVEL
+    //  10. GUESTMODE — ROOM LEVEL
     // ============================================================
 
     static void testGuestModeAllowedTypes() {
@@ -469,9 +467,9 @@ public class SmartHomeTestRunner {
 
     static void testGuestModePowerOnlyAllowed() {
         Room r = new Room("Test");
-        r.addDevice(new SmartLight()); // 10W — allowed
-        r.addDevice(new SmartThermostat()); // 150W — blocked
-        r.addDevice(new SmartSpeaker()); // 5W — allowed
+        r.addDevice(new SmartLight());       // 10W — allowed
+        r.addDevice(new SmartThermostat());  // 150W — blocked
+        r.addDevice(new SmartSpeaker());     // 5W — allowed
 
         Set<Class<?>> allowed = new HashSet<>(Arrays.asList(SmartLight.class, SmartSpeaker.class));
         SmartDevice gm = new GuestMode(r, allowed);
@@ -489,38 +487,37 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 11. ORDER SENSITIVITY
+    //  11. ORDER SENSITIVITY
     // ============================================================
 
     static void testThrottledThenEcoVsRawEco() {
         // Setup 1: Throttle to 80W first, then EcoMode 100W
         Room r1 = new Room("S1");
-        r1.addDevice(new SmartLight()); // 10W
-        r1.addDevice(new SmartLight()); // 10W
-        r1.addDevice(new PowerThrottled(new SmartThermostat(), 80)); // 80W
+        r1.addDevice(new SmartLight());                                // 10W
+        r1.addDevice(new SmartLight());                                // 10W
+        r1.addDevice(new PowerThrottled(new SmartThermostat(), 80));   // 80W
         SmartDevice eco1 = new EcoMode(r1, 100);
         eco1.activate();
         double power1 = eco1.getPowerUsage();
 
         // Setup 2: Raw thermostat, EcoMode 100W
         Room r2 = new Room("S2");
-        r2.addDevice(new SmartLight()); // 10W
-        r2.addDevice(new SmartLight()); // 10W
-        r2.addDevice(new SmartThermostat()); // 150W
+        r2.addDevice(new SmartLight());       // 10W
+        r2.addDevice(new SmartLight());       // 10W
+        r2.addDevice(new SmartThermostat());  // 150W
         SmartDevice eco2 = new EcoMode(r2, 100);
         eco2.activate();
         double power2 = eco2.getPowerUsage();
 
         assertTrue("Order produces different results (p1=" + power1 + " vs p2=" + power2 + ")",
-                power1 != power2);
+                   power1 != power2);
 
-        // Setup 1 should keep all devices (10+10+80=100), setup 2 sheds thermostat
-        // (10+10=20)
+        // Setup 1 should keep all devices (10+10+80=100), setup 2 sheds thermostat (10+10=20)
         assertTrue("Throttled version keeps more devices", power1 > power2);
     }
 
     // ============================================================
-    // 12. UPGRADED DEVICE ON ROOM
+    //  12. UPGRADED DEVICE ON ROOM
     // ============================================================
 
     static void testAccessRestrictedOnRoom() {
@@ -576,7 +573,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 13. ROOM-LEVEL TYPE SAFETY
+    //  13. ROOM-LEVEL TYPE SAFETY
     // ============================================================
 
     static void testEcoModeRejectsLeafAtCompileTime() {
@@ -584,7 +581,7 @@ public class SmartHomeTestRunner {
         // If your EcoMode constructor accepts Room (not SmartDevice),
         // then the following line should NOT compile:
         //
-        // new EcoMode(new SmartLight(), 100); // SHOULD NOT COMPILE
+        //     new EcoMode(new SmartLight(), 100);  // SHOULD NOT COMPILE
         //
         // We can't test a compile error at runtime, so this test just
         // verifies that EcoMode works correctly with a Room.
@@ -596,7 +593,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // 14. MIXED SCENARIO
+    //  14. MIXED SCENARIO
     // ============================================================
 
     static void testGuestModeWithMixedEnhancements() {
@@ -606,8 +603,8 @@ public class SmartHomeTestRunner {
         SmartLight light = new SmartLight();
 
         r.addDevice(speaker);
-        r.addDevice(new AccessRestricted(thermo, 9999)); // locked
-        r.addDevice(new TimerControlled(light, 120)); // timed
+        r.addDevice(new AccessRestricted(thermo, 9999));  // locked
+        r.addDevice(new TimerControlled(light, 120));      // timed
 
         Set<Class<?>> allowed = new HashSet<>(Arrays.asList(SmartLight.class, SmartSpeaker.class));
         SmartDevice gm = new GuestMode(r, allowed);
@@ -621,7 +618,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // HELPER
+    //  HELPER 
     // ============================================================
 
     static SmartDevice prepareForNight(SmartDevice entity) {
@@ -629,7 +626,7 @@ public class SmartHomeTestRunner {
     }
 
     // ============================================================
-    // ASSERTION UTILITIES
+    //  ASSERTION UTILITIES
     // ============================================================
 
     static void assertEquals(String testName, double expected, double actual) {

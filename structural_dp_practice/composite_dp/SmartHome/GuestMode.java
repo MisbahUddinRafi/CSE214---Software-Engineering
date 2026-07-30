@@ -33,20 +33,22 @@ public class GuestMode extends SmartCompositeDecorator {
     }
 
     @Override
-    public String getStatus() {
-        StringBuilder sb = new StringBuilder("[GUEST MODE]\n");
-        sb.append("[").append(wrapped.name).append("]"); 
+    public String getStatus() { 
+        StringBuilder sb = new StringBuilder(super.getStatus()); 
+        sb.append(" [GUEST MODE]\n");
+        
+        List<SmartDevice> devices = wrapped.getDevices(); 
 
-        for (SmartDevice d : wrapped.getDevices()) {
-            sb.append("\n\t").append(d.getStatus());
-
+        for (SmartDevice d : devices) {
             if (!guestAllowed.contains(d.getDeviceType())) {
-                sb.append(" [guest-restricted]");
+                sb.append("\t" + d.getStatus() + " [guest-restricted]\n"); 
+            } else {
+                sb.append("\t" + d.getStatus() + "\n"); 
             }
         }
 
-        return sb.toString();
-    }
+        return sb.toString(); 
+    } 
 
     
 }

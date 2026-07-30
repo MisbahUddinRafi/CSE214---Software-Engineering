@@ -13,7 +13,7 @@ public abstract class SmartComposite implements SmartDevice {
 
     // return unmodifiable copy of the device list
     public List<SmartDevice> getDevices() {
-        return Collections.unmodifiableList(components); 
+        return Collections.unmodifiableList(components);
     } 
 
     public boolean deactivateLastActiveDevice() {

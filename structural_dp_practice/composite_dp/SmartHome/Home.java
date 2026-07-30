@@ -1,8 +1,6 @@
 package SmartHome;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List; 
 
 public class Home extends SmartComposite {  
 
@@ -19,7 +17,6 @@ public class Home extends SmartComposite {
         components.remove(room); 
     }
 
-
     // useful for eco mode 
     public boolean deactivateLastActiveDevice() { 
         for (SmartDevice r : components.reversed()) {
@@ -31,15 +28,28 @@ public class Home extends SmartComposite {
         return false; 
     } 
 
+
     @Override
-    public List<SmartDevice> getDevices() {
-        List<SmartDevice> devices = new ArrayList<>();
-
+    public void activate() {
         for (SmartDevice r : components) {
-            devices.addAll(((SmartComposite) r).getDevices());
-        }
+            r.activate(); 
+        }  
+    }
 
-        return Collections.unmodifiableList(devices);
+    @Override
+    public void deactivate() {
+        for (SmartDevice r : components) {
+            r.deactivate(); 
+        }  
+    }
+
+    @Override
+    public double getPowerUsage() {
+        double power = 0.0; 
+        for (SmartDevice r : components) {
+            power += r.getPowerUsage(); 
+        }
+        return power;
     }
 
     @Override
