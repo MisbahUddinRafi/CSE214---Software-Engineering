@@ -14,13 +14,15 @@ public class Viewer implements Observer {
     } 
 
     @Override
-    public void subscribe(NewsChannel newsChannel) {
-        newsChannel.addViewer(this); 
-        this.subscribedChannels.add(newsChannel);         
-    }
+    public void subscribe(NewsChannel newsChannel) { 
+        if (!subscribedChannels.contains(newsChannel)) {    // prevent double subscription
+            newsChannel.addViewer(this); 
+            this.subscribedChannels.add(newsChannel);       
+        }  
+    } 
 
     @Override
-    public void unsubscribe(NewsChannel newsChannel) {
+    public void unsubscribe(NewsChannel newsChannel) { 
         newsChannel.removeViewer(this); 
         this.subscribedChannels.remove(newsChannel); 
     }
