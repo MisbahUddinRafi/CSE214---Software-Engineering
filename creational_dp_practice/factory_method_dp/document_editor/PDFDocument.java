@@ -1,4 +1,4 @@
-package factory_method_dp.document_editor;
+package creational_dp_practice.factory_method_dp.document_editor;
 
 public class PDFDocument implements Document {
     private String name; 

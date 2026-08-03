@@ -1,4 +1,4 @@
-package SmartHome;
+package structural_dp_practice.composite_dp.SmartHome;
 
 public class SmartThermostat implements SmartDevice {
     private boolean state;      // ON = true, OFF = false 

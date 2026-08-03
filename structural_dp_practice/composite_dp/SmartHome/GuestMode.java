@@ -1,4 +1,4 @@
-package SmartHome;
+package structural_dp_practice.composite_dp.SmartHome;
 
 import java.util.Set; 
 import java.util.List;

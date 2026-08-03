@@ -1,4 +1,4 @@
-package builder_dp.computer_configuration_system;
+package creational_dp_practice.builder_dp.computer_configuration_system;
 
 public class Computer {
     private String type; 

@@ -1,4 +1,4 @@
-package prototype_dp.graphic_editor;
+package creational_dp_practice.prototype_dp.graphic_editor;
 
 public class Main {
     public static void main(String[] args) {

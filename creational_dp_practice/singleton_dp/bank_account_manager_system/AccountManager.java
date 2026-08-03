@@ -1,6 +1,6 @@
-package singleton_dp.bank_account_manager_system;
+package creational_dp_practice.singleton_dp.bank_account_manager_system;
 
-import singleton_dp.logger_system.Logger; 
+import creational_dp_practice.singleton_dp.logger_system.Logger; 
 import java.util.Map; 
 import java.util.HashMap; 
 

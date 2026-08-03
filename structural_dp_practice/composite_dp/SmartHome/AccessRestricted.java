@@ -1,4 +1,4 @@
-package SmartHome;
+package structural_dp_practice.composite_dp.SmartHome;
 
 public class AccessRestricted extends SmartDeviceDecorator {
     private final int pin; 

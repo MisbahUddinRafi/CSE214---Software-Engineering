@@ -1,4 +1,4 @@
-package Coffee_shop;
+package structural_dp_practice.decorator_dp.Coffee_shop;
 
 public class SugarDecorator extends CoffeeDecorator {
     private double sugarPrice = 0.5;

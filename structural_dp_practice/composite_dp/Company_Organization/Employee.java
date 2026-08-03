@@ -1,3 +1,5 @@
+package structural_dp_practice.composite_dp.Company_Organization;
+
 public class Employee implements OrganizationComponent {
     private String name; 
     private String designation; 

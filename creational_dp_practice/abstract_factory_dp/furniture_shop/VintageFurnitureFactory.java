@@ -1,4 +1,4 @@
-package abstract_factory_dp.furniture_shop;
+package creational_dp_practice.abstract_factory_dp.furniture_shop;
 
 class VintageChair implements Chair {
     @Override 

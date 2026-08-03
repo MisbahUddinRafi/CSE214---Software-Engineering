@@ -1,4 +1,4 @@
-package singleton_dp.bank_account_manager_system;
+package creational_dp_practice.singleton_dp.bank_account_manager_system;
 
 
 public class Account {

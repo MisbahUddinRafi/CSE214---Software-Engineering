@@ -1,4 +1,4 @@
-package Coffee_shop; 
+package structural_dp_practice.decorator_dp.Coffee_shop;
 
 public class Americano implements Coffee {
     private double price = 5;

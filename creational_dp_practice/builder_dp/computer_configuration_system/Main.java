@@ -1,4 +1,4 @@
-package builder_dp.computer_configuration_system;
+package creational_dp_practice.builder_dp.computer_configuration_system;
 
 public class Main {
     public static void main(String[] args) {

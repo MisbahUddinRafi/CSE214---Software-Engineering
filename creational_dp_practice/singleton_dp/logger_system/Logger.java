@@ -1,4 +1,4 @@
-package singleton_dp.logger_system;
+package creational_dp_practice.singleton_dp.logger_system;
 
 public class Logger {
     private static Logger loggerInstance;   // must be static, cause used inside static method getInstance() 

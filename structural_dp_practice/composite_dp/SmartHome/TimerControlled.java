@@ -1,4 +1,4 @@
-package SmartHome;
+package structural_dp_practice.composite_dp.SmartHome;
 
 public class TimerControlled extends SmartDeviceDecorator {
     private int timerSeconds; 

@@ -1,0 +1,28 @@
+# Compiled class files
+*.class
+
+# Java build output
+build/
+target/
+out/
+.gradle/
+
+# Logs
+*.log
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+
+
+# helper python file 
+_update_packages.py 

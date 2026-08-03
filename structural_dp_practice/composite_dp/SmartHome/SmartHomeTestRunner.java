@@ -1,3 +1,5 @@
+package structural_dp_practice.composite_dp.SmartHome;
+
 /**
  * SmartHomeTestRunner.java
  *

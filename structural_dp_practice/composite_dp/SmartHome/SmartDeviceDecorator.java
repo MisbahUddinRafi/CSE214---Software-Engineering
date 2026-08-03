@@ -1,4 +1,4 @@
-package SmartHome;
+package structural_dp_practice.composite_dp.SmartHome;
 
 public abstract class SmartDeviceDecorator implements SmartDevice {
     protected SmartDevice wrappedDevice; 

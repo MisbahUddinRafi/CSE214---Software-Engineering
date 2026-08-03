@@ -1,4 +1,4 @@
-package builder_dp.house_construction_system;
+package creational_dp_practice.builder_dp.house_construction_system;
 
 public class Main {
     public static void main(String[] args) {
